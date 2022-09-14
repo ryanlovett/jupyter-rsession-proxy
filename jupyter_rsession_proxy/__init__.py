@@ -32,6 +32,17 @@ def get_icon_path():
     )
 
 
+def rewrite_logger(response, request):
+    '''
+       As of rstudio-server 1.4ish, it would send the client to /auth-sign-in
+       rather than what the client sees as the full URL followed by
+       /auth-sign-in. See rstudio/rstudio#8888. We rewrite the response by
+       sending the client to the right place.
+    '''
+	f = open('/tmp/rewrite.log', 'a')
+	f.write(str(response.headers.get_all()))
+	f.close()
+ 
 def get_system_user():
     try:
         user = pwd.getpwuid(os.getuid())[0]
@@ -91,6 +102,8 @@ def setup_rserver():
             cmd.append(f'--server-data-dir={server_data_dir}')
         if _support_arg('database-config-file'):
             cmd.append(f'--database-config-file={database_config_file}')
+        if _support_arg('auth-cookies-force-secure'):
+            cmd.append(f'--auth-cookies-force-secure=1')
 
         return cmd
 
@@ -101,6 +114,7 @@ def setup_rserver():
         'command': _get_cmd,
         'timeout': _get_timeout(),
         'environment': _get_env,
+        'rewrite_response': rewrite_logger,
         'launcher_entry': {
             'title': 'RStudio',
             'icon_path': get_icon_path()
