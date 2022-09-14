@@ -40,10 +40,14 @@ def rewrite_logger(response, request):
        sending the client to the right place.
     '''
     f = open('/tmp/rewrite.log', 'a')
+    f.write(f"{request.host=}\n")
     for header, v in response.headers.get_all():
         f.write(f"{header=}:\t")
         f.write(f"{v=}\n")
-    f.write('\n')
+        if header == "Location" and request.host not in v:
+            # Visit the correct page
+            u = urlparse(v)
+            response.headers[header] = urlunparse(u._replace(netloc=request.host))
     f.flush()
     f.close()
  
