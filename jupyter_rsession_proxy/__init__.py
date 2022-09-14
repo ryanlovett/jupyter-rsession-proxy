@@ -39,9 +39,11 @@ def rewrite_logger(response, request):
        /auth-sign-in. See rstudio/rstudio#8888. We rewrite the response by
        sending the client to the right place.
     '''
-	f = open('/tmp/rewrite.log', 'a')
-	f.write(str(response.headers.get_all()))
-	f.close()
+    f = open('/tmp/rewrite.log', 'a')
+    f.write(str(response.headers.get_all()))
+    f.write('\n')
+    f.flush()
+    f.close()
  
 def get_system_user():
     try:
