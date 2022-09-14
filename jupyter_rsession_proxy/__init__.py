@@ -40,7 +40,9 @@ def rewrite_logger(response, request):
        sending the client to the right place.
     '''
     f = open('/tmp/rewrite.log', 'a')
-    f.write(str(response.headers.get_all()))
+    for header, v in response.headers.get_all():
+        f.write(f"{header=}:\t")
+        f.write(f"{v=}\n")
     f.write('\n')
     f.flush()
     f.close()
