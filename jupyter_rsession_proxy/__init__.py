@@ -39,20 +39,18 @@ def rewrite_logger(response, request):
        /auth-sign-in. See rstudio/rstudio#8888. We rewrite the response by
        sending the client to the right place.
     '''
-    f = open('/tmp/rewrite.log', 'a')
-    f.write(f"{request.host=}\n")
     for header, v in response.headers.get_all():
-        f.write(f"{header=}:\t")
-        f.write(f"{v=}\n")
         if header == "Location":
+            f = open('/tmp/rewrite.log', 'a')
+            f.write(f"{request.host=}\n")
             u = urlparse(v)
             f.write(f"{u=}\n")
             if u.netloc != request.host:
                 f.write(f"rewriting\n")
                 response.headers[header] = urlunparse(u._replace(netloc=request.host))
-    f.write('===\n')
-    f.flush()
-    f.close()
+            f.write('===\n')
+            f.flush()
+            f.close()
  
 def get_system_user():
     try:
@@ -113,8 +111,6 @@ def setup_rserver():
             cmd.append(f'--server-data-dir={server_data_dir}')
         if _support_arg('database-config-file'):
             cmd.append(f'--database-config-file={database_config_file}')
-        if _support_arg('auth-cookies-force-secure'):
-            cmd.append(f'--auth-cookies-force-secure=1')
 
         return cmd
 
