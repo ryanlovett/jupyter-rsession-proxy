@@ -44,10 +44,13 @@ def rewrite_logger(response, request):
     for header, v in response.headers.get_all():
         f.write(f"{header=}:\t")
         f.write(f"{v=}\n")
-        if header == "Location" and request.host not in v:
-            # Visit the correct page
+        if header == "Location":
             u = urlparse(v)
-            response.headers[header] = urlunparse(u._replace(netloc=request.host))
+            f.write(f"{u=}\n")
+            if u.netloc != request.host:
+                f.write(f"rewriting\n")
+                response.headers[header] = urlunparse(u._replace(netloc=request.host))
+    f.write('===\n')
     f.flush()
     f.close()
  
