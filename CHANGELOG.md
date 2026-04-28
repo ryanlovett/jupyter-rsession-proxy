@@ -1,5 +1,36 @@
 # Changelog
 
+## 2.5
+
+### v2.5.0 - 2026-04-28
+
+([full changelog](https://github.com/jupyterhub/jupyter-rsession-proxy/compare/ff8e103044c7bedf304243846f43f5d1b0e7179f...341bfa93f8f572c64ef89b998b9bd3db0e700d8e))
+
+#### Maintenance and upkeep improvements
+
+- Secure server_data_dir creation with nested temp dir [#173](https://github.com/jupyterhub/jupyter-rsession-proxy/pull/173) ([@dometto](https://github.com/dometto), [@minrk](https://github.com/minrk))
+
+#### Documentation improvements
+
+- Update security note for RStudio server deployment [#171](https://github.com/jupyterhub/jupyter-rsession-proxy/pull/171) ([@dometto](https://github.com/dometto), [@consideRatio](https://github.com/consideRatio), [@minrk](https://github.com/minrk))
+
+#### Continuous integration improvements
+
+- Bump actions/checkout from 5 to 6 [#174](https://github.com/jupyterhub/jupyter-rsession-proxy/pull/174) ([@consideRatio](https://github.com/consideRatio))
+
+#### Other merged PRs
+
+- Allow specifying server prefix and R path [#170](https://github.com/jupyterhub/jupyter-rsession-proxy/pull/170) ([@dometto](https://github.com/dometto), [@ryanlovett](https://github.com/ryanlovett))
+
+#### Contributors to this release
+
+The following people contributed discussions, new ideas, code and documentation contributions, and review.
+See [our definition of contributors](https://github-activity.readthedocs.io/en/latest/use/#how-does-this-tool-define-contributions-in-the-reports).
+
+([GitHub contributors page for this release](https://github.com/jupyterhub/jupyter-rsession-proxy/graphs/contributors?from=2025-11-19&to=2026-04-17&type=c))
+
+@consideRatio ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fjupyter-rsession-proxy+involves%3AconsideRatio+updated%3A2025-11-19..2026-04-17&type=Issues)) | @dometto ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fjupyter-rsession-proxy+involves%3Adometto+updated%3A2025-11-19..2026-04-17&type=Issues)) | @minrk ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fjupyter-rsession-proxy+involves%3Aminrk+updated%3A2025-11-19..2026-04-17&type=Issues)) | @ryanlovett ([activity](https://github.com/search?q=repo%3Ajupyterhub%2Fjupyter-rsession-proxy+involves%3Aryanlovett+updated%3A2025-11-19..2026-04-17&type=Issues))
+
 ## 2.4
 
 ### v2.4.0 - 2025-11-18
