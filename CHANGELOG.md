@@ -2,7 +2,7 @@
 
 ## 2.5
 
-### v2.5.0 - 2026-04-17
+### v2.5.0 - 2026-04-28
 
 ([full changelog](https://github.com/jupyterhub/jupyter-rsession-proxy/compare/ff8e103044c7bedf304243846f43f5d1b0e7179f...341bfa93f8f572c64ef89b998b9bd3db0e700d8e))
 
