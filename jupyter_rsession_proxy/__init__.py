@@ -55,8 +55,13 @@ def get_system_user():
     return(user)
 
 def setup_rserver(r_path="", prefix="rstudio", launcher_title="RStudio"):
+    rstudio_config_dir = tempfile.mkdtemp()
+
     def _get_env(port, unix_socket):
-        return dict(USER=get_system_user())
+        env = dict(USER=get_system_user())
+        if 'RSTUDIO_CONFIG_DIR' not in os.environ:
+            env['RSTUDIO_CONFIG_DIR'] = rstudio_config_dir
+        return env
 
     def db_config(db_dir):
         '''
