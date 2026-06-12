@@ -115,7 +115,8 @@ def setup_rserver(r_path="", prefix="rstudio", launcher_title="RStudio"):
             'database-config-file',
             'www-thread-pool-size',
             'www-socket',
-            'rsession-which-r'
+            'rsession-which-r',
+            'session-rpc-key-file'
         ])
         if supported_args['www-root-path']:
             cmd.append('--www-root-path={base_url}' + f'{prefix}/')
@@ -141,6 +142,10 @@ def setup_rserver(r_path="", prefix="rstudio", launcher_title="RStudio"):
             cmd.append('--www-socket={unix_socket}')
         else:
             cmd.append('--www-port={port}')
+
+        if supported_args['session-rpc-key-file']:
+            session_rpc_key_file = os.path.join(server_data_dir, 'session-rpc-key')
+            cmd.append(f'--session-rpc-key-file={session_rpc_key_file}')
 
         return cmd
 
