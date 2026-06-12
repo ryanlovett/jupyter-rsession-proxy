@@ -1,9 +1,10 @@
 import getpass
 import os
+import pwd
 import shutil
 import subprocess
 import tempfile
-import pwd
+import uuid
 from textwrap import dedent
 from urllib.parse import urlparse, urlunparse, urljoin
 
@@ -55,7 +56,14 @@ def get_system_user():
     return(user)
 
 def setup_rserver(r_path="", prefix="rstudio", launcher_title="RStudio"):
-    rstudio_config_dir = tempfile.mkdtemp()
+    rstudio_config_dir = os.environ.get('RSTUDIO_CONFIG_DIR')
+    if rstudio_config_dir is None:
+        rstudio_config_dir = tempfile.mkdtemp()
+    _session_rpc_key = os.path.join(rstudio_config_dir, 'session-rpc-key')
+    if not os.path.exists(_session_rpc_key) and os.access(rstudio_config_dir, os.W_OK):
+        with open(_session_rpc_key, 'w') as f:
+            f.write(uuid.uuid4().hex)
+        os.chmod(_session_rpc_key, 0o600)
 
     def _get_env(port, unix_socket):
         env = dict(USER=get_system_user())
